@@ -21,7 +21,7 @@ import UIKit
 //  iv) cellForRow
 //  v) allOfTheAbove
 //
-//  A: numberOfSections and numberOrRows
+//  A: numberOfSections and numberOrRows   wrong!!!  del
 //
 //  3) If a tableview is added to a view controller, what are the TWO properties that need to be set in order for the view controller to provide table data & handling of its interactions?
 //
@@ -59,9 +59,9 @@ import UIKit
 // For question 7
 
 
-enum viewStateType {
+enum viewStateType {//first leter of the enum,  is capital letter
     case Loading
-    case Loaded
+    case Loaded  ///all letter of the enum properties are lower case.
     case Failed
 }
 

@@ -19,7 +19,6 @@ class ViewController: UIViewController {
         title = "Another Table View"
         viewModels = DetailViewModel.defaultData
     }
-
 }
 
 extension ViewController: UITableViewDataSource {
@@ -38,6 +37,7 @@ extension ViewController: UITableViewDataSource {
 }
 
 extension ViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let viewModel = viewModels[indexPath.row]
         tableView.deselectRow(at: indexPath, animated: true)

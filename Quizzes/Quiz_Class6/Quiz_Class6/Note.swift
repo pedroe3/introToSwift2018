@@ -18,7 +18,7 @@ struct Note {
 
 
 extension Note {
-  
+ //static 
 
     
     var isNewText: String { //need to create a function to calculate thedifference of time more than 5 min.

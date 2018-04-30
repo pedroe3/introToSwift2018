@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    
+
     @IBOutlet weak var tableView: UITableView!
     
     var viewModels = [DetailViewModel]()
@@ -19,44 +19,84 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         title = "Another Table"
         viewModels = DetailViewModel.DefaultData
-    }//end function
-}//end class
+    }
+}
 
 extension ViewController: UITableViewDataSource  {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count
-    }//end funct
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath) as? DetailTableViewCell
         let viewModel = viewModels[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath) as? DetailTableViewCell
         
         cell?.configureWith(viewModel)
-        
-      
-        
         return cell ?? UITableViewCell()
-        
     }
-
 }
 
 extension ViewController: UITableViewDelegate {
     
     
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let viewModel = viewModels[indexPath.row]
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        var item =  viewModels[indexPath.row]
-        
-        item.isSelected = !item.isSelected
+        presentActionSheetWith(viewModel)
     }
     
-    private func pesentActionSheet(_ viewModel: DetailViewModel){
-        let actionSheetController = UIAlertController(title: "Modal", message: "select action for view model", preferredStyle: .actionSheet)
+    
+    private func presentActionSheetWith(_ viewModel: DetailViewModel){
+ 
+        let actionSheetController = UIAlertController(title: "Select Action", message: "Select action for view model", preferredStyle: .actionSheet)
+        
+        let modalAction = UIAlertAction(title: "Modal", style: .default) { [weak self] (_) in
+            self?.presentModal(viewModel)
+        }
+        let pushAction = UIAlertAction(title: "Push", style: .default) { [weak self] (_) in
+            self?.pushView(viewModel)
+        }
+        
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] (_) in
+            self?.delete(viewModel)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        actionSheetController.addAction(modalAction)
+        actionSheetController.addAction(pushAction)
+        actionSheetController.addAction(deleteAction)
+        actionSheetController.addAction(cancelAction)
+        
+        navigationController?.present(actionSheetController, animated: true, completion: nil)
     }
-       
+    
+    private func presentModal(_ viewModel: DetailViewModel) {
+        let modalVC = storyboard?.instantiateViewController(withIdentifier: "modal") as! ModalViewController
+        
+        self.definesPresentationContext = true // to define the context of any presentation
+        //the presnter and the presentee needs to know
+        
+        modalVC.modalPresentationStyle = .overCurrentContext
+        
+        modalVC.viewModel = viewModel
+        navigationController?.present(modalVC, animated: true, completion: nil)
+    }
+    
+    private func pushView(_ viewModel: DetailViewModel) {
+        let pushedVC = storyboard?.instantiateViewController(withIdentifier: "pushed") as! PushedViewController
+        
+        pushedVC.viewModel = viewModel
+        
+        navigationController?.pushViewController(pushedVC, animated: true)
+        
+    }
+    
+    private func delete(_ viewModel: DetailViewModel) {
+        viewModels = viewModels.filter({ $0.imageName != viewModel.imageName })
+        tableView.reloadData()
+    }
+    
 }
