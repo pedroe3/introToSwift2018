@@ -11,9 +11,15 @@ import UIKit
 //
 //  1) If I want to create a blueprint of properties/functions that an object can conform to, I can use a what?
 //
+<<<<<<< HEAD
 //  A: Protocol
 //
 //  2) What are the two functions that are necessary in order to conform to UITableViewDelegate?
+=======
+//  A: protocol
+//
+//  2) What are the two functions that are necessary in order to conform to UITableViewDataSource?
+>>>>>>> upstream/master
 //
 //  i) numberOfSections
 //  ii) numberOfRows
@@ -21,11 +27,19 @@ import UIKit
 //  iv) cellForRow
 //  v) allOfTheAbove
 //
+<<<<<<< HEAD
 //  A: numberOfSections and numberOrRows   wrong!!!  del
 //
 //  3) If a tableview is added to a view controller, what are the TWO properties that need to be set in order for the view controller to provide table data & handling of its interactions?
 //
 //  A:dataSource and Delegate
+=======
+//  A: ii, iv
+//
+//  3) If a tableview is added to a view controller, what are the TWO properties that need to be set in order for the view controller to provide table data & handling of its interactions?
+//
+//  A: delegate and datasource
+>>>>>>> upstream/master
 //
 //  4) Create a value type object in this project called 'Note' and give it the following properties:
 //
@@ -52,22 +66,34 @@ import UIKit
 //
 //  7) Describe to me all the things that are problematic or can be improved w/ the following code?
 //
+<<<<<<< HEAD
 //  A:  //
+=======
+//  A:
+>>>>>>> upstream/master
 //
 
 
 // For question 7
 
 
+<<<<<<< HEAD
 enum viewStateType {//first leter of the enum,  is capital letter
     case Loading
     case Loaded  ///all letter of the enum properties are lower case.
     case Failed
+=======
+enum ViewStateType {
+    case loading
+    case loaded
+    case failed
+>>>>>>> upstream/master
 }
 
 class MainViewController: UIViewController {
     
     var modalVC: ModalViewController!
+<<<<<<< HEAD
     var viewState: viewStateType = .Loading  //.loading belongs to the modalViewController
     
     override func viewDidLoad(){
@@ -89,4 +115,13 @@ class ModalViewController: UIViewController, UITableViewDelegate { //table view 
         
        //no needed spaces
     }
+=======
+    var viewState: ViewStateType = .loading
+}
+
+class ModalViewController: UIViewController {
+
+    weak var mainVC: MainViewController!
+    var viewState: ViewStateType = .loading
+>>>>>>> upstream/master
 }
