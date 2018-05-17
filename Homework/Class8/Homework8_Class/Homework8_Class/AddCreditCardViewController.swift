@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum CardDetailSectionCellType: Int {
+enum CardDetailSectionCellType: String {
     case FirstName
     case lastName
     case CardNumber
@@ -191,27 +191,3 @@ extension AddCreditCardViewController: TextEntryDelegate {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

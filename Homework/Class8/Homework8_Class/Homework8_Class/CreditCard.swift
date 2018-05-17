@@ -16,6 +16,7 @@ struct CreditCard {
     var securityCode: String = ""
     var address: Address = Address()
 }
+
 extension CreditCard {
     
     var areDetailsFilledOut: Bool {

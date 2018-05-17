@@ -19,7 +19,7 @@ class CreditCardsViewController: UIViewController {
     }
     
     @objc private func addNewCreditCardButtonPressed() {
-        let newAddressVC = storyboard?.instantiateViewController(withIdentifier: "newCreditCard") as! UITableViewCell
+        let newAddressVC = storyboard?.instantiateViewController(withIdentifier: "newCreditCard") as! AddCreditCardViewController
         navigationController?.pushViewController(newAddressVC, animated: true)
     }
 }
@@ -27,23 +27,27 @@ class CreditCardsViewController: UIViewController {
 extension CreditCardsViewController: AddCreditCardDelegate {
     func didPressSaveButton(_ creditCard: CreditCard) {
 
-        creditCards.append(creditCard)
+        //creditCards.append(creditCard)
+    }
+}
+
+extension CreditCardsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return creditCards.count
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "helloItsMaria", for: indexPath) as! CreditCardSummaryCell
+        //let creditCard = creditCards[indexPath.row]
+        
+        //cell.nameLabel.text = creditCard.expirationDate
+        
+        return cell
     }
 }
 
 extension CreditCardsViewController: UITableViewDelegate {
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return creditCards.count
-    }
-
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "helloItsMaria", for: indexPath) as! CreditCardSummaryCell
-        let creditCard = creditCards[indexPath.row]
-        
-        cell.nameLabel.text = creditCard.expirationDate
-        
-        return cell
-    }
+   
 }

@@ -14,24 +14,13 @@ protocol TextEntryDelegate: class {
 
 class TextEntryCell: UITableViewCell {
     weak var delegate: TextEntryDelegate?
-    
-    
-    
-    
-    
+
     var cardDetailCellType: CardDetailSectionCellType? = nil
-    
-    
-    
-    
+
     var addressCellType: AddressSectionCellType? = nil
     
     @IBOutlet weak var fieldName: UILabel!
-    
-    
-    
-    
-    
+
     @IBOutlet weak var textField: UITextField!
 }
 
@@ -41,19 +30,10 @@ extension TextEntryCell: UITextFieldViewMode {
         guard let currentText = textField.text else { return true }
         
         let expectedText = (currentText as NSString).replacingCharacters(in: range, with: string)
-        
-        
-        
-        
-        
-        
+
         if cardDetailCellType == CardDetailSectionCellType.expirationDate  {
             if currentText.count == 2 {
-                
-                
-                
-                
-                
+
                 textField.text = textField.text! + "/"
             }
             
